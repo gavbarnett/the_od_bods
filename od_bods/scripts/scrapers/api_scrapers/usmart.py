@@ -1,7 +1,7 @@
 try:
-    from processor import Processor
+    from scripts.scrapers.processor import Processor
 except:
-    from .processor import Processor
+    from od_bods.scripts.scrapers.processor import Processor
 
 
 class ProcessorUSMART(Processor):

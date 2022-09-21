@@ -4,7 +4,7 @@ from os.path import isfile, join
 import csv
 import pytest
 from .conftest import csv_checker
-from ..dcat import ProcessorDCAT
+from scripts.scrapers.api_scrapers.dcat import ProcessorDCAT
 
 test_proc = ProcessorDCAT()
 
@@ -19,15 +19,15 @@ def list_sources(dir):
     return sources
 
 
-@pytest.mark.parametrize("sources", list_sources("tests/mock_data/dcat"))
+@pytest.mark.parametrize("sources", list_sources("od_bods/tests/mock_data/dcat"))
 def test_get_datasets(sources):
     owner = "test_owner"
-    outputdir = "tests/mock_data/output/dcat/"
+    outputdir = "od_bods/tests/mock_data/output/dcat/"
     start_url = "file:///" + os.path.abspath(
-        "tests/mock_data/dcat/" + sources + ".json"
+        "od_bods/tests/mock_data/dcat/" + sources + ".json"
     )
     fname = outputdir + sources + ".csv"
-    expected_fname = "tests/mock_data/dcat/expected/" + sources + ".csv"
+    expected_fname = "od_bods/tests/mock_data/dcat/expected/" + sources + ".csv"
     if os.path.exists(fname):
         os.remove(fname)
     if not os.path.exists(outputdir):

@@ -4,7 +4,7 @@ from os.path import isfile, join
 import csv
 import pytest
 from .conftest import csv_checker
-from ..arcgis import ProcessorARCGIS
+from scripts.scrapers.api_scrapers.arcgis import ProcessorARCGIS
 
 test_proc = ProcessorARCGIS()
 
@@ -19,15 +19,15 @@ def list_sources(dir):
     return sources
 
 
-@pytest.mark.parametrize("sources", list_sources("tests/mock_data/arcgis"))
+@pytest.mark.parametrize("sources", list_sources("od_bods/tests/mock_data/arcgis"))
 def test_get_datasets(sources):
     owner = "test_owner"
-    outputdir = "tests/mock_data/output/arcgis/"
+    outputdir = "od_bods/tests/mock_data/output/arcgis/"
     start_url = "file:///" + os.path.abspath(
-        "tests/mock_data/arcgis/" + sources + ".json"
+        "od_bods/tests/mock_data/arcgis/" + sources + ".json"
     )
     fname = outputdir + sources + ".csv"
-    expected_fname = "tests/mock_data/arcgis/expected/" + sources + ".csv"
+    expected_fname = "od_bods/tests/mock_data/arcgis/expected/" + sources + ".csv"
     if os.path.exists(fname):
         os.remove(fname)
     if not os.path.exists(outputdir):

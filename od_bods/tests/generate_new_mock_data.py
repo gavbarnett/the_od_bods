@@ -6,9 +6,9 @@ import csv
 import json
 import os
 
-from usmart import ProcessorUSMART
-from dcat import ProcessorDCAT
-from arcgis import ProcessorARCGIS
+from od_bods.scripts.scrapers.api_scrapers.usmart import ProcessorUSMART
+from od_bods.scripts.scrapers.api_scrapers.dcat import ProcessorDCAT
+from od_bods.scripts.scrapers.api_scrapers.arcgis import ProcessorARCGIS
 
 
 def get_urls():
@@ -45,9 +45,9 @@ def test_get_datasets(name, type):
             # no python parser implemented
             return ()
     owner = "test_owner"
-    outputdir = "tests/mock_data/" + type + "/expected/"
+    outputdir = "od_bods/tests/mock_data/" + type + "/expected/"
     start_url = "file:///" + os.path.abspath(
-        "tests/mock_data/" + type + "/" + name + ".json"
+        "od_bods/tests/mock_data/" + type + "/" + name + ".json"
     )
     fname = outputdir + name + ".csv"
     if os.path.exists(fname):
@@ -65,7 +65,7 @@ def main():
         print(f"-> {name} | {url_list[name]['type']} | {url_list[name]['url']}")
         if url_list[name]["type"] in supported_scrapers:
             location = (
-                "tests\\mock_data\\" + url_list[name]["type"] + "\\" + name + ".json"
+                "od_bods\\tests\\mock_data\\" + url_list[name]["type"] + "\\" + name + ".json"
             )
             json_data = get_json(url_list[name]["url"])
             if url_list[name]["type"] == "arcgis":
