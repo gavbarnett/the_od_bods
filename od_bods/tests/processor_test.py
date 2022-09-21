@@ -2,7 +2,7 @@
 """
 import os
 import pytest
-from ..processor import Processor
+from scripts.scrapers.processor import Processor
 
 
 class ValidMockProcessor(Processor):
